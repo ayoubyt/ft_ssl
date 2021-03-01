@@ -93,7 +93,7 @@ static unsigned char MD5_PADDING [64] = { /* 512 Bits */
         md5_final (_digest, context);
 
         free (context->buf);
-         free (context);
+        free (context);
 
         return _digest;
  }

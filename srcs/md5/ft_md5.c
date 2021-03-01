@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5.c                                              :+:      :+:    :+:   */
+/*   ft_md5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 23:32:16 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/01 23:40:01 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/02 00:47:49 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "md5.h"
+#include "ft_md5.h"
 
 char		*ft_get_padded_data(
 							char *data,
@@ -28,7 +28,7 @@ char		*ft_get_padded_data(
 	new_len = len + added_len;
 	padded_data = malloc(new_len);
 	ft_memcpy(padded_data, data, len);
-	padded_data[len] = 1;
+	padded_data[len] = 0x80;
 	ft_bzero(padded_data + len + 1, added_len - 1);
 	original_length_int_bits = (len * 8);
 	ft_memcpy(padded_data + (new_len - 8), &original_length_int_bits, 8);

@@ -7,9 +7,9 @@ BUILD_DIR := build
 HEADERS_DIR := includes
 
 SRCS := main.c \
-		md5/md5.c
+		md5/ft_md5.c
 
-HEADERS = global.h md5.h
+HEADERS = ft_global.h ft_md5.h
 
 
 ################## libft ################
@@ -65,4 +65,4 @@ re-all: re
 # .PHONY : $(LIBFT)
 
 .PHONY:
-	all clean fclean
+	all clean fclean re-all
