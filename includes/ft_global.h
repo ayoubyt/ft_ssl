@@ -1,5 +1,9 @@
-#include <stdlib.h>
-#include <stdint.h>
+#ifndef FT_GLOBAL_H
+# define FT_GLOBAL_H
 
-#include "libft.h"
+# include <stdlib.h>
+# include <stdint.h>
 
+# include "libft.h"
+
+#endif
