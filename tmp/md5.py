@@ -1,4 +1,5 @@
 import math
+from typing import MutableSequence
 
 rotate_amounts = [7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
                   5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20,
@@ -31,6 +32,7 @@ def md5(message):
     while len(message)%64 != 56:
         message.append(0)
     message += orig_len_in_bits.to_bytes(8, byteorder='little')
+    print(f"{' '.join([hex(e)[2:] for e in message])}")
 
     hash_pieces = init_values[:]
 
@@ -54,8 +56,6 @@ def md5_to_hex(digest):
     return '{:032x}'.format(int.from_bytes(raw, byteorder='big'))
 
 if __name__=='__main__':
-    demo = [b"", b"a", b"abc", b"message digest", b"abcdefghijklmnopqrstuvwxyz",
-            b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
-            b"12345678901234567890123456789012345678901234567890123456789012345678901234567890"]
+    demo = [b'zzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaozzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaao']
     for message in demo:
         print(md5_to_hex(md5(message)),' <= "',message.decode('ascii'),'"', sep='')

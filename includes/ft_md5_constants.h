@@ -9,7 +9,6 @@
 #define C0 0x98badcfe
 #define D0 0x10325476
 
-extern uint32_t	g_s[64];
-extern uint32_t	g_t[64];
+extern const uint32_t	g_t[64];
 
 #endif

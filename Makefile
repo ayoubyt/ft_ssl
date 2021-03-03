@@ -7,7 +7,10 @@ BUILD_DIR := build
 HEADERS_DIR := includes
 
 SRCS := main.c \
-		md5/ft_md5.c
+		md5/ft_md5.c \
+		md5/ft_md5_constants.c \
+		md5/ft_md5_process.c
+
 
 HEADERS = ft_global.h ft_md5.h
 
@@ -31,15 +34,19 @@ LIBFT_HEADERS_DIR := $(LIBFT_DIR)/$(LIBFT_HEADERS_DIR)
 LIBFT := $(LIBFT_DIR)/$(LIBFT_BIN_DIR)/lib$(LIBFT_SUFF).a
 
 CC := gcc
-CCFLAGS := -g
+CCFLAGS := -O3
+CCLINKFLAGS = -lcrypto
 
-all : $(NAME)
+all : libft $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CCFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CCFLAGS) $(OBJS) $(LIBFT) $(CCLINKFLAGS) -o $(NAME)
 
 $(BUILD_DIR)/%.o : $(SRCS_DIR)/%.c $(HEADERS) | $(OBJS_SUBDIRS)
 	gcc -c $< -o $@ $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
+
+libft:
+	make -C $(LIBFT_DIR)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
@@ -49,11 +56,9 @@ $(OBJS_SUBDIRS):
 
 clean:
 	rm -rf $(BUILD_DIR)
-	make clean -C $(LIBFT_DIR)
 
 fclean: clean
 	rm -rf $(NAME)
-	make fclean -C $(LIBFT_DIR)
 
 
 re: fclean all
@@ -61,8 +66,7 @@ re: fclean all
 re-all: re
 	make re -C $(LIBFT_BIN_DIR)
 
-
 # .PHONY : $(LIBFT)
 
 .PHONY:
-	all clean fclean re-all
+	all clean fclean re-all libft
