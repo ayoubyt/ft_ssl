@@ -6,7 +6,7 @@
 /*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 23:32:16 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/03 02:09:24 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/03 02:34:18 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void		ft_print_md5_digest(uint32_t *digest)
 	unsigned char	*digest_bytes;
 
 	digest_bytes = (unsigned char*)digest;
-	ft_putstr("0x");
+	printf("0x");
 	i = 0;
 	while (i < 16)
 	{
-		ft_putnbr_base(digest_bytes[i], 16);
+		printf("%x", digest_bytes[i]);
 		i++;
 	}
 	printf("\n");

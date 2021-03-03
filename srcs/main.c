@@ -6,7 +6,7 @@
 /*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 23:40:22 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/03 02:12:39 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/03 02:34:37 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <openssl/md5.h>
 #include <time.h>
 
-#define size 0
+#define size 58547
 
 int	main(int argc, char **argv)
 {
