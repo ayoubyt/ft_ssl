@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_md5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 23:32:16 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/03 02:34:18 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/04 12:46:06 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_md5.h"
-#include "ft_md5_constants.h"
 
 void print_mem(unsigned char *data, int size)
 {
@@ -23,8 +22,8 @@ void print_mem(unsigned char *data, int size)
 	printf("\n");
 }
 
-char		*ft_get_padded_data(
-								char *data,
+void		ft_get_padded_data(
+								unsigned char *data,
 								size_t len,
 								unsigned char **result_data,
 								size_t *result_len
