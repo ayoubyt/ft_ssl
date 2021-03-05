@@ -6,7 +6,7 @@
 /*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 21:09:57 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/05 00:19:25 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/05 12:06:16 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,13 @@ typedef struct	s_md5_ctx
 	size_t			buff_size;
 }				t_md5_ctx;
 
-
+#define A0 0x67452301
+#define B0 0xefcdab89
+#define C0 0x98badcfe
+#define D0 0x10325476
 
 uint32_t	*ft_md5(unsigned char *data, size_t len);
 void		ft_md5_process(t_md5_ctx *ctx, uint32_t *digest);
 void		ft_print_md5_digest(uint32_t *digest);
-
-uint32_t	f(uint32_t x, uint32_t y, uint32_t z);
-uint32_t	g(uint32_t x, uint32_t y, uint32_t z);
-uint32_t	h(uint32_t x, uint32_t y, uint32_t z);
-uint32_t	i(uint32_t x, uint32_t y, uint32_t z);
-
-uint32_t	rl(uint32_t w, uint32_t s);
-uint32_t	r1o(t_md5_ctx *ctx, uint32_t x, uint32_t s, uint32_t t);
-uint32_t	r2o(t_md5_ctx *ctx, uint32_t x, uint32_t s, uint32_t t);
-uint32_t	r3o(t_md5_ctx *ctx, uint32_t x, uint32_t s, uint32_t t);
-uint32_t	r4o(t_md5_ctx *ctx, uint32_t x, uint32_t s, uint32_t t);
 
 #endif
