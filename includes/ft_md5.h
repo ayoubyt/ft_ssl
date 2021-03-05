@@ -6,7 +6,7 @@
 /*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 21:09:57 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/02 23:15:20 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/05 00:19:25 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 ** rotate left
 */
 
- #define RL(w,s) ((w << s) | ((w & 0xFFFFFFFF) >> (32 - s)))
+ #define RL(w,s) ((w << s) | ((w) >> (32 - s)))
 
 /*
 ** R{n}D : round 'n' operation
