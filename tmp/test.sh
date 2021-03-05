@@ -1,2 +1,0 @@
-str=`./tmp/test.py`
-
