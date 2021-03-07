@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_global.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 21:09:41 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/02 21:09:52 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/05 16:37:00 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,8 @@
 # include <stdint.h>
 
 # include "libft.h"
+
+typedef unsigned char	byte_t;
+typedef uint32_t		word_t;
 
 #endif

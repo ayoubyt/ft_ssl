@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_md5.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 21:09:57 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/05 12:06:16 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/05 16:24:45 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #define I(x, y, z) ((y) ^ ((x) | (~z)))
 
 /*
-** rotate left
+** rotate left 32 bit intigers
 */
 
  #define RL(w,s) ((w << s) | ((w) >> (32 - s)))
