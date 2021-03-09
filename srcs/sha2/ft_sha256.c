@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sha256.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:37:22 by aaguert           #+#    #+#             */
-/*   Updated: 2021/03/08 18:02:08 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/03/09 13:13:47 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,29 @@ const word_t K[64] = {
 	0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
 	0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
 	0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
-	0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
-};
+	0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2};
 
-void	get_padded_data(byte_t *data, size_t size, byte_t **paddded_data, size_t new_size)
+void get_padded_data(byte_t *data, size_t size, byte_t **padded_data, size_t *new_size)
 {
-	
+	// size of input data in bits
+	unsigned bit_len;
+	// length added to 'size' to satisfy: size + added_size ≡ 0 [64];
+	unsigned added_size;
+	// lenth of padded data
+
+	bit_len = size * 8;
+	added_size = 64 - (size + 1 + 8) % 64;
+	*new_size = size + added_size;
+	*padded_data = malloc(*new_size);
+	ft_memcpy(*padded_data, data, size);
+	// adding on bit, 0x80 = 0b10000000
+	*padded_data[size] = 0x80;
+	// padding with remaining memory eith zeros
+	ft_bzero(*padded_data + size + 1, added_size - 1);
+	ft_memcpy(*padded_data + (*new_size - 8), &bit_len, 8);
 }
 
-void	init_ctx(sha256_ctx_t *ctx)
+void init_ctx(sha256_ctx_t *ctx, byte_t *data, size_t size)
 {
 	ctx->h0 = 0x6a09e667;
 	ctx->h1 = 0xbb67ae85;
@@ -38,11 +52,9 @@ void	init_ctx(sha256_ctx_t *ctx)
 	ctx->h5 = 0x9b05688c;
 	ctx->h6 = 0x1f83d9ab;
 	ctx->h7 = 0x5be0cd19;
-
-	
+	get_padded_data(data, size, &ctx->buff, &ctx->buffsize);
 }
 
-word_t	*sha256(unsigned char *data, size_t size)
+word_t *sha256(byte_t *data, size_t size)
 {
-	
 }
