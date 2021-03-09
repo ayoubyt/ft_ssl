@@ -6,7 +6,7 @@
 /*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 21:09:57 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/05 16:24:45 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/03/09 15:25:33 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 ** rotate left 32 bit intigers
 */
 
- #define RL(w,s) ((w << s) | ((w) >> (32 - s)))
+ #define RL(w,s) (((w) << s) | ((w) >> (32 - s)))
 
 /*
 ** R{n}D : round 'n' operation

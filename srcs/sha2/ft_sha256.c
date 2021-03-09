@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sha256.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:37:22 by aaguert           #+#    #+#             */
-/*   Updated: 2021/03/09 13:13:47 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/09 15:03:24 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void get_padded_data(byte_t *data, size_t size, byte_t **padded_data, size_t *ne
 	ft_memcpy(*padded_data, data, size);
 	// adding on bit, 0x80 = 0b10000000
 	*padded_data[size] = 0x80;
-	// padding with remaining memory eith zeros
+	// padding  remaining memory with zeros
 	ft_bzero(*padded_data + size + 1, added_size - 1);
 	ft_memcpy(*padded_data + (*new_size - 8), &bit_len, 8);
 }
