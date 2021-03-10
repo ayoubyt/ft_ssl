@@ -6,16 +6,16 @@
 /*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:42:44 by aaguert           #+#    #+#             */
-/*   Updated: 2021/03/05 16:55:14 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/03/10 17:44:13 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SHA2_H
 #define FT_SHA2_H
 
-#include "ft_global.h"
+# include "ft_global.h"
 
-typedef struct sha256_ctx
+typedef struct
 {
 	word_t h0;
 	word_t h1;
@@ -28,5 +28,16 @@ typedef struct sha256_ctx
 	byte_t *buff;
 	size_t buffsize;
 } sha256_ctx_t;
+
+# define CH(x, y, z) (((x) & (y)) | (~(x) & (z)))
+# define MAJ(x, y, z) (((x) & (y)) | ((x) & (z)) | ((y) & (z)))
+# define SIGMA0(x) (ROR32((x), 2) ^ ROR32((x), 13) ^ ROR32((x), 22))
+# define SIGMA1(x) (ROR32((x), 6) ^ ROR32((x), 11) ^ ROR32((x), 25))
+
+// small sigmas 'σ'
+# define SSIGMA0(x) (ROR32((x), 7) ^ ROR32((x), 18) ^ SHR((x), 3))
+# define SSIGMA1(x) (ROR32((x), 17) ^ ROR32((x), 19) ^ SHR((x), 10))
+
+void ft_sha256_process(sha256_ctx_t *ctx, byte_t *digest);
 
 #endif

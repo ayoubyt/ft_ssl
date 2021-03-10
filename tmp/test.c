@@ -4,15 +4,18 @@
 #include <stdint.h>
 #include <limits.h>
 
+#define REV32(x) (             \
+	(((x)&0x000000FF) << 24) | \
+	(((x)&0x0000FF00) << 8) |  \
+	(((x)&0xFF000000) >> 24) | \
+	(((x)&0x00FF0000) >> 8)\
+)
+
 int main()
 {
 	char s[] = "abcd";
-	uint32_t u = 0x6162;
-	unsigned char c = u;
+	uint32_t u = 0x61626364;
 
-	for (size_t i = 0; i < 4; i++)
-		printf("%02x:", *(((char*)&u) + i));
-	printf("\n");
-	
-	printf("%c\n", c);
+	printf("%x\n", u);
+	printf("%x\n", REV32(u));
 }
