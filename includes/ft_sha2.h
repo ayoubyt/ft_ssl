@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sha2.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:42:44 by aaguert           #+#    #+#             */
-/*   Updated: 2021/03/05 16:55:14 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/03/09 23:45:22 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "ft_global.h"
 
-typedef struct sha256_ctx
+typedef struct
 {
 	word_t h0;
 	word_t h1;

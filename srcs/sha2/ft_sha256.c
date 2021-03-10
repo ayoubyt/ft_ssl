@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sha256.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:37:22 by aaguert           #+#    #+#             */
-/*   Updated: 2021/03/09 15:03:24 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/03/09 23:46:17 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void get_padded_data(byte_t *data, size_t size, byte_t **padded_data, size_t *ne
 	*padded_data[size] = 0x80;
 	// padding  remaining memory with zeros
 	ft_bzero(*padded_data + size + 1, added_size - 1);
+	// reverse bytes to convert to big endian
+	bit_len = REV32(bit_len);
 	ft_memcpy(*padded_data + (*new_size - 8), &bit_len, 8);
 }
 
@@ -57,4 +59,6 @@ void init_ctx(sha256_ctx_t *ctx, byte_t *data, size_t size)
 
 word_t *sha256(byte_t *data, size_t size)
 {
+	sha256_ctx_t ctx;
+	init_ctx(&ctx, data, size);
 }
