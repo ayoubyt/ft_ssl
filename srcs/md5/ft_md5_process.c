@@ -6,7 +6,7 @@
 /*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 12:09:06 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/04 12:37:18 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/03/10 18:35:55 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ void	round4(t_md5_ctx *c, size_t idx)
 
 void	ft_md5_process(t_md5_ctx *ctx, uint32_t *digest)
 {
-	uint32_t	reg[4];
-	int			i;
+	uint32_t		reg[4];
+	size_t			i;
 
 	i = 0;
 	while (i < (ctx->buff_size / 64))

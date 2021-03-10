@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_md5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 23:32:16 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/05 12:45:42 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/10 18:57:00 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_md5.h"
 
-void print_mem(unsigned char *data, int size)
+void print_mem(byte_t *data, size_t size)
 {
-	printf("size = %d\n", size);
+	printf("size = %zu\n", size);
 	for (size_t i = 0; i < size; i++)
 	{
-		printf("%x ", data[i]);
+		printf("%02x:", data[i]);
 	}
 	printf("\n");
 }

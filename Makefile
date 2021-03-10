@@ -8,7 +8,9 @@ HEADERS_DIR := includes
 
 SRCS := main.c \
 		md5/ft_md5.c \
-		md5/ft_md5_process.c
+		md5/ft_md5_process.c \
+		sha2/ft_sha256.c \
+		sha2/ft_sha256_process.c
 
 
 HEADERS = ft_global.h ft_md5.h
@@ -33,7 +35,7 @@ LIBFT_HEADERS_DIR := $(LIBFT_DIR)/$(LIBFT_HEADERS_DIR)
 LIBFT := $(LIBFT_DIR)/$(LIBFT_BIN_DIR)/lib$(LIBFT_SUFF).a
 
 CC := gcc
-CCFLAGS := -O3
+CCFLAGS := -O3 
 CCLINKFLAGS = 
 
 all : libft $(NAME)

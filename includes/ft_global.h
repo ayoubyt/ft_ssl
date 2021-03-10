@@ -6,7 +6,7 @@
 /*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 21:09:41 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/10 17:34:26 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/03/10 18:38:47 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@
 
 typedef unsigned char byte_t;
 typedef uint32_t word_t;
+
+// must delete
+void print_mem(unsigned char *data, size_t size);
 
 #endif

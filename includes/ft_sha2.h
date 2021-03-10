@@ -6,7 +6,7 @@
 /*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:42:44 by aaguert           #+#    #+#             */
-/*   Updated: 2021/03/10 17:44:13 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/03/10 18:36:15 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ typedef struct
 # define SSIGMA0(x) (ROR32((x), 7) ^ ROR32((x), 18) ^ SHR((x), 3))
 # define SSIGMA1(x) (ROR32((x), 17) ^ ROR32((x), 19) ^ SHR((x), 10))
 
-void ft_sha256_process(sha256_ctx_t *ctx, byte_t *digest);
+void	ft_sha256_process(sha256_ctx_t *ctx);
+void	ft_print_sha256_digest(byte_t *digest);
+byte_t	*ft_sha256(byte_t *data, size_t size);
+
 
 #endif

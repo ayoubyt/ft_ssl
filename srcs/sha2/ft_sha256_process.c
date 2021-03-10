@@ -10,7 +10,7 @@ const word_t K[64] = {
 	0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
 	0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2};
 
-void ft_sha256_process(sha256_ctx_t *ctx, byte_t *digest)
+void ft_sha256_process(sha256_ctx_t *ctx)
 {
 	word_t w[64];
 	word_t a, b, c, d, e, f, g, h;
@@ -24,10 +24,16 @@ void ft_sha256_process(sha256_ctx_t *ctx, byte_t *digest)
 			// sha256 uses big endian and host system is little endian
 			// so we need to reverse bytes in order to use them with our constants, wich
 			// our system stores them in little endian
-			if (i < 16)
-				w[i] = REV32((word_t)(ctx->buff + 64 * i) + j);
+			if (j < 16)
+			{
+				w[j] = REV32(((word_t*)(ctx->buff + 64 * i))[j]);
+				// printf("w[%zu] = %x\n", j, w[j]);
+			}
 			else
-				w[i] = SSIGMA1(w[j - 2]) + w[j - 7] + SSIGMA0(w[j - 15]) + w[j - 16];
+			{
+				w[j] = SSIGMA1(w[j - 2]) + w[j - 7] + SSIGMA0(w[j - 15]) + w[j - 16];
+				// exit(EXIT_SUCCESS);
+			}
 		}
 		a = ctx->h0;
 		b = ctx->h1;

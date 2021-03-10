@@ -6,7 +6,7 @@
 /*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:37:22 by aaguert           #+#    #+#             */
-/*   Updated: 2021/03/10 17:51:35 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/03/10 19:40:58 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,24 @@
 void get_padded_data(byte_t *data, size_t size, byte_t **padded_data, size_t *new_size)
 {
 	// size of input data in bits
-	unsigned bit_len;
+	unsigned long	bit_len;
 	// length added to 'size' to satisfy: size + added_size ≡ 0 [64];
-	unsigned added_size;
-	// lenth of padded data
+	unsigned		added_size;
+	byte_t			*bit_len_data;
 
 	bit_len = size * 8;
-	added_size = 64 - ((size + 1 + 8) % 64);
+	added_size = (64 - ((size + 1 + 8) % 64)) + 1 + 8;
 	*new_size = size + added_size;
 	*padded_data = malloc(*new_size);
 	ft_memcpy(*padded_data, data, size);
 	// adding on bit, 0x80 = 0b10000000
-	*padded_data[size] = 0x80;
+	(*padded_data)[size] = 0x80;
 	// padding  remaining memory with zeros
 	ft_bzero(*padded_data + size + 1, added_size - 1);
-	// converting 'bit_len' to big endian
-	bit_len = REV32(bit_len);
-	ft_memcpy(*padded_data + (*new_size - 8), &bit_len, 8);
+	// copy 'bit_len' to the end of (padded_data) in big endian byte order
+	bit_len_data = (byte_t*)&bit_len;
+	for (size_t i = 0; i < 8; i++)
+		(*padded_data + (*new_size - 8))[i] = bit_len_data[7 - i];
 }
 
 void init_ctx(sha256_ctx_t *ctx, byte_t *data, size_t size)
@@ -59,23 +60,31 @@ void ft_sha256_finalize(sha256_ctx_t *ctx, byte_t *digest)
 	ctx->h5 = REV32(ctx->h5);
 	ctx->h6 = REV32(ctx->h6);
 	ctx->h7 = REV32(ctx->h7);
-	ft_memcpy(wdigest + 0, ctx->h0, 4);
-	ft_memcpy(wdigest + 1, ctx->h1, 4);
-	ft_memcpy(wdigest + 2, ctx->h2, 4);
-	ft_memcpy(wdigest + 3, ctx->h3, 4);
-	ft_memcpy(wdigest + 4, ctx->h4, 4);
-	ft_memcpy(wdigest + 5, ctx->h5, 4);
-	ft_memcpy(wdigest + 6, ctx->h6, 4);
-	ft_memcpy(wdigest + 7, ctx->h7, 4);
+	ft_memcpy(wdigest + 0, &ctx->h0, 4);
+	ft_memcpy(wdigest + 1, &ctx->h1, 4);
+	ft_memcpy(wdigest + 2, &ctx->h2, 4);
+	ft_memcpy(wdigest + 3, &ctx->h3, 4);
+	ft_memcpy(wdigest + 4, &ctx->h4, 4);
+	ft_memcpy(wdigest + 5, &ctx->h5, 4);
+	ft_memcpy(wdigest + 6, &ctx->h6, 4);
+	ft_memcpy(wdigest + 7, &ctx->h7, 4);
 }
 
 
-byte_t *sha256(byte_t *data, size_t size)
+void	ft_print_sha256_digest(byte_t *digest)
+{
+	for (size_t i = 0; i < 32; i++)
+		printf("%02x", digest[i]);
+	printf("\n");
+}
+
+byte_t *ft_sha256(byte_t *data, size_t size)
 {
 	static byte_t	digest[32];
 	sha256_ctx_t	ctx;
 
 	init_ctx(&ctx, data, size);
-	ft_sha256_process(&ctx, digest);
+	ft_sha256_process(&ctx);
 	ft_sha256_finalize(&ctx, digest);
+	return digest;
 }
