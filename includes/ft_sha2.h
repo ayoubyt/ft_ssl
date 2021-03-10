@@ -6,14 +6,14 @@
 /*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:42:44 by aaguert           #+#    #+#             */
-/*   Updated: 2021/03/09 23:45:22 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/10 22:00:39 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SHA2_H
 #define FT_SHA2_H
 
-#include "ft_global.h"
+# include "ft_global.h"
 
 typedef struct
 {
@@ -28,5 +28,19 @@ typedef struct
 	byte_t *buff;
 	size_t buffsize;
 } sha256_ctx_t;
+
+# define CH(x, y, z) (((x) & (y)) | (~(x) & (z)))
+# define MAJ(x, y, z) (((x) & (y)) | ((x) & (z)) | ((y) & (z)))
+# define SIGMA0(x) (ROR32((x), 2) ^ ROR32((x), 13) ^ ROR32((x), 22))
+# define SIGMA1(x) (ROR32((x), 6) ^ ROR32((x), 11) ^ ROR32((x), 25))
+
+// small sigmas 'σ'
+# define SSIGMA0(x) (ROR32((x), 7) ^ ROR32((x), 18) ^ SHR((x), 3))
+# define SSIGMA1(x) (ROR32((x), 17) ^ ROR32((x), 19) ^ SHR((x), 10))
+
+void	ft_sha256_process(sha256_ctx_t *ctx);
+void	ft_print_sha256_digest(byte_t *digest);
+byte_t	*ft_sha256(byte_t *data, size_t size);
+
 
 #endif
