@@ -7,6 +7,7 @@ BUILD_DIR := build
 HEADERS_DIR := includes
 
 SRCS := main.c \
+		ft_arg_parse.c \
 		md5/ft_md5.c \
 		md5/ft_md5_process.c \
 		sha2/ft_sha256.c \
@@ -26,7 +27,7 @@ LIBFT_SUFF := ft
 ################## preprocessing #####################
 
 OBJS := $(addprefix $(BUILD_DIR)/, $(SRCS:.c=.o))
-OBJS_SUBDIRS := $(dir $(OBJS))
+OBJS_SUBDIRS := $(sort $(dir $(OBJS)))
 
 SRCS := $(addprefix $(SRCS_DIR)/, $(SRCS))
 HEADERS := $(addprefix $(HEADERS_DIR)/, $(HEADERS))
@@ -35,8 +36,11 @@ LIBFT_HEADERS_DIR := $(LIBFT_DIR)/$(LIBFT_HEADERS_DIR)
 LIBFT := $(LIBFT_DIR)/$(LIBFT_BIN_DIR)/lib$(LIBFT_SUFF).a
 
 CC := gcc
-CCFLAGS := -O3 
+CCFLAGS := -O3 -g
 CCLINKFLAGS = 
+
+# $(info $(SRCS_DIR) " :: " $(SRCS))
+# $(info  $(BUILD_DIR) " :: " $(OBJS))
 
 all : libft $(NAME)
 
@@ -53,7 +57,7 @@ $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 $(OBJS_SUBDIRS):
-	mkdir -p $@
+	mkdir -p $(OBJS_SUBDIRS)
 
 clean:
 	rm -rf $(BUILD_DIR)
