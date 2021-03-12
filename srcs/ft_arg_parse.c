@@ -6,15 +6,45 @@
 /*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 13:02:31 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/12 16:26:51 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/03/12 17:33:09 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_arg_parse.h"
 
 args_t args = {
-	0, 0, 0, 0, 0, 0
-};
+	0, 0, 0, 0, {0, 0}, {0, 0}};
+
+void add_string_node(string_list_t *sl, char *str)
+{
+	string_node_t *node;
+
+	node = malloc(sizeof(string_node_t));
+	node->val = str;
+	node->next = NULL;
+
+	if (!sl->head)
+		sl->head = sl->tail = node;
+	else
+	{
+		sl->tail->next = node;
+		sl->tail = sl->tail->next;
+	}
+}
+
+void free_string_list(string_list_t *sl)
+{
+	string_node_t *tmp;
+
+	while (sl->head)
+	{
+		tmp = sl->head;
+		sl->head = sl->head->next;
+		free(tmp);
+	}
+	sl->head = NULL;
+	sl->tail = NULL;
+}
 
 static void print_usage()
 {
@@ -37,7 +67,7 @@ static void parse_command(int argc, char **argv)
 
 void parse_hash_opts(int argc, char **argv)
 {
-	for (size_t i = 1; i < argc; i++)
+	for (size_t i = 2; i < argc; i++)
 	{
 		if (argv[i][0] == '-')
 		{
@@ -47,13 +77,17 @@ void parse_hash_opts(int argc, char **argv)
 				switch (argv[i][j])
 				{
 				case 's':
-					if (i + 1 >= argc || argv[i + 1][0] == "-")
+					if (i + 1 >= argc || argv[i + 1][0] == '-')
 					{
 						ft_putstr_fd("error : must specify a string after '-s' flag\n", 2);
 						print_usage();
 						exit(EXIT_FAILURE);
 					}
-
+					else
+					{
+						add_string_node(&args.s_opt_params, argv[i + 1]);
+						i++;
+					}
 					break;
 				case 'p':
 					args.p_opt = 1;
@@ -72,8 +106,8 @@ void parse_hash_opts(int argc, char **argv)
 				print_usage();
 				exit(EXIT_FAILURE);
 			}
-			// else
-			// 	args.s_opt_param = argv[i];
+			else
+				add_string_node(&args.files, argv[i]);
 		}
 	}
 }
