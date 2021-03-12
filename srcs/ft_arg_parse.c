@@ -6,13 +6,15 @@
 /*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 13:02:31 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/11 13:24:19 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/12 12:14:31 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_arg_parse.h"
 
-args_t args;
+args_t args = {
+	0, 0, 0, 0, 0, 0
+};
 
 static void print_usage()
 {
@@ -31,6 +33,10 @@ static void parse_command(int argc, char **argv)
 		ft_putendl_fd(argv[1], 2);
 		exit(EXIT_FAILURE);
 	}
+}
+
+void	parse_hash_opts()
+{
 
 }
 
@@ -43,5 +49,7 @@ void ft_argparse(int argc, char **argv)
 	else
 	{
 		parse_command(argc, argv);
+		if (args.cmd == MD5 || args.cmd == SHA256)
+			parse_hash_opts(argc, argv);
 	}
 }

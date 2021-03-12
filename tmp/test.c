@@ -8,14 +8,11 @@
 	(((x)&0x000000FF) << 24) | \
 	(((x)&0x0000FF00) << 8) |  \
 	(((x)&0xFF000000) >> 24) | \
-	(((x)&0x00FF0000) >> 8)\
-)
+	(((x)&0x00FF0000) >> 8))
 
 int main()
 {
-	char s[] = "abcd";
-	uint32_t u = 0x61626364;
+	char *ss[] = {[1] = "zb", [0] = "tarma"};
 
-	printf("%x\n", u);
-	printf("%x\n", REV32(u));
+	printf("0 = %s\n1 = %s\n", ss[0], ss[1]);
 }
