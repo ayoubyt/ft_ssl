@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_md5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 23:32:16 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/10 18:57:00 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/03/13 23:51:25 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void		ft_print_md5_digest(uint32_t *digest)
 		printf("%02x", digest_bytes[i]);
 		i++;
 	}
-	printf("\n");
 }
 
 uint32_t	*ft_md5(unsigned char *data, size_t len)

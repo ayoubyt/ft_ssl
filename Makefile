@@ -8,10 +8,12 @@ HEADERS_DIR := includes
 
 SRCS := main.c \
 		ft_arg_parse.c \
+		hash_handlers.c \
 		md5/ft_md5.c \
 		md5/ft_md5_process.c \
 		sha2/ft_sha256.c \
 		sha2/ft_sha256_process.c
+
 
 
 HEADERS = ft_global.h ft_md5.h
@@ -37,7 +39,7 @@ LIBFT := $(LIBFT_DIR)/$(LIBFT_BIN_DIR)/lib$(LIBFT_SUFF).a
 
 CC := gcc
 CCFLAGS := -O3 -g
-CCLINKFLAGS = 
+CCLINKFLAGS =
 
 # $(info $(SRCS_DIR) " :: " $(SRCS))
 # $(info  $(BUILD_DIR) " :: " $(OBJS))
