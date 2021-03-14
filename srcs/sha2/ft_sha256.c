@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sha256.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:37:22 by aaguert           #+#    #+#             */
-/*   Updated: 2021/03/13 23:51:31 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/14 17:17:00 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void ft_sha256_finalize(sha256_ctx_t *ctx, byte_t *digest)
 void	ft_print_sha256_digest(byte_t *digest)
 {
 	for (size_t i = 0; i < 32; i++)
-		printf("%02x", digest[i]);
+		ft_print_byte(digest[i]);
 }
 
 byte_t *ft_sha256(byte_t *data, size_t size)

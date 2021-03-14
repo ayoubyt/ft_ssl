@@ -9,6 +9,7 @@ HEADERS_DIR := includes
 SRCS := main.c \
 		ft_arg_parse.c \
 		hash_handlers.c \
+		utils.c \
 		md5/ft_md5.c \
 		md5/ft_md5_process.c \
 		sha2/ft_sha256.c \

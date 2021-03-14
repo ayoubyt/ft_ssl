@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash_handlers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 22:33:27 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/13 23:55:15 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/03/14 17:31:10 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void print_stdin_hash()
 
 	input = ft_readall(0);
 	ft_putendl(input);
-	print_hash(input, ft_strlen(input));
+	print_hash((byte_t*)input, ft_strlen(input));
 	free(input);
+	ft_putchar('\n');
 }
 
 void print_file_hash(char *filename)
@@ -59,14 +60,37 @@ void print_file_hash(char *filename)
 		ft_putstr(filename);
 		ft_putstr(") = ");
 	}
-	print_hash(data, ft_strlen(data));
+	print_hash((byte_t*)data, ft_strlen(data));
 	if (args.r_opt)
 	{
 		ft_putstr(" ");
 		ft_putstr(filename);
 	}
-	printf("\n");
+	ft_putchar('\n');
 }
+
+void print_string_hash(char *str)
+{
+	if (!args.r_opt)
+	{
+		if (args.cmd == MD5)
+			ft_putstr("MD5 (\"");
+		else if (args.cmd == SHA256)
+			ft_putstr("SHA256 (\"");
+		ft_putstr(str);
+		ft_putstr("\") = ");
+	}
+	print_hash((byte_t*)str, ft_strlen(str));
+	if (args.r_opt)
+	{
+		ft_putstr(" \"");
+		ft_putstr(str);
+		ft_putchar('"');
+	}
+	ft_putchar('\n');
+}
+
+
 
 void handle_hash(void)
 {
@@ -81,4 +105,12 @@ void handle_hash(void)
 		print_file_hash(tmp->val);
 		tmp = tmp->next;
 	}
+	tmp = args.s_opt_params.head;
+	while (tmp)
+	{
+		print_string_hash(tmp->val);
+		tmp = tmp->next;
+	}
+	if (!args.files.head && !args.s_opt_params.head && !args.p_opt)
+		print_stdin_hash();
 }

@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   uitls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/01 23:40:22 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/14 17:18:12 by aaguert          ###   ########.fr       */
+/*   Created: 2021/03/14 16:58:02 by aaguert           #+#    #+#             */
+/*   Updated: 2021/03/14 17:08:29 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "ft_arg_parse.h"
-#include "handlers.h"
 #include "ft_global.h"
 
-int main(int argc, char **argv)
+void	ft_print_byte(byte_t b)
 {
-	ft_argparse(argc, argv);
-	if (args.cmd == MD5 || args.cmd == SHA256)
-		handle_hash();
-	// ft_print_byte(0xf0);
-	// ft_print_byte(0x0f);
-	// ft_putchar('\n');
-}
+		static char letters[] = {'a', 'b', 'c', 'd', 'e', 'f'};
+		byte_t i1, i2;
 
+		i1 = (b & 0xF0) >> 4;
+		i2 = b & 0x0F;
+		if (i1  < 10)
+			ft_putnbr(i1);
+		else
+			ft_putchar(letters[i1 % 10]);
+		if (i2  < 10)
+			ft_putnbr(i2);
+		else
+			ft_putchar(letters[i2 % 10]);
+}
