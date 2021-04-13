@@ -9,7 +9,7 @@ import hashlib
 print("\033[96m************** md5 ***************\033[0m\n")
 for _ in range(10):
 
-	random_string = "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(1, 10)))
+	random_string = "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(1, 10000)))
 
 	myprog = subprocess.run(f"./ft_ssl md5 -s {random_string} -q", capture_output=True, text=True, shell=True)
 
