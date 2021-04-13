@@ -6,7 +6,7 @@
 /*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 13:02:31 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/12 17:33:09 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/04/13 17:25:15 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,14 @@ void parse_hash_opts(int argc, char **argv)
 				case 'r':
 					args.r_opt = 1;
 					break;
+				case 'q':
+					args.q_opt = 1;
+					break;
 				}
 			}
 		}
 		else
-		{
-			if (args.cmd)
-			{
-				ft_putstr_fd("error : invalid input\n", 2);
-				print_usage();
-				exit(EXIT_FAILURE);
-			}
-			else
-				add_string_node(&args.files, argv[i]);
-		}
+			add_string_node(&args.files, argv[i]);
 	}
 }
 
