@@ -6,21 +6,11 @@
 /*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 23:32:16 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/14 17:16:27 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/04/14 11:38:08 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_md5.h"
-
-void print_mem(byte_t *data, size_t size)
-{
-	printf("size = %zu\n", size);
-	for (size_t i = 0; i < size; i++)
-	{
-		printf("%02x:", data[i]);
-	}
-	printf("\n");
-}
 
 void		ft_get_padded_data(
 								unsigned char *data,
