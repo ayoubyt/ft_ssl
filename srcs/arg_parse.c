@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arg_parse.c                                     :+:      :+:    :+:   */
+/*   arg_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 13:02:31 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/04/13 17:25:15 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/11/07 21:33:35 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void parse_command(int argc, char **argv)
 	}
 }
 
-void parse_hash_opts(int argc, char **argv)
+void parse_opts(int argc, char **argv)
 {
 	for (size_t i = 2; i < argc; i++)
 	{
@@ -117,6 +117,6 @@ void ft_argparse(int argc, char **argv)
 	{
 		parse_command(argc, argv);
 		if (args.cmd == MD5 || args.cmd == SHA256)
-			parse_hash_opts(argc, argv);
+			parse_opts(argc, argv);
 	}
 }

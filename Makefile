@@ -8,7 +8,7 @@ HEADERS_DIR := includes
 
 SRCS := main.c \
 		utils.c \
-		ft_arg_parse.c \
+		arg_parse.c \
 		hash/hash_handlers.c \
 		hash/md5/ft_md5.c \
 		hash/md5/ft_md5_process.c \
@@ -54,8 +54,8 @@ $(BUILD_DIR)/main.o : $(SRCS_DIR)/main.c $(HEADERS) | $(OBJS_SUBDIRS)
 	gcc -c $(SRCS_DIR)/main.c -o $(BUILD_DIR)/main.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
 $(BUILD_DIR)/utils.o : $(SRCS_DIR)/utils.c $(HEADERS) | $(OBJS_SUBDIRS)
 	gcc -c $(SRCS_DIR)/utils.c -o $(BUILD_DIR)/utils.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
-$(BUILD_DIR)/ft_arg_parse.o : $(SRCS_DIR)/ft_arg_parse.c $(HEADERS) | $(OBJS_SUBDIRS)
-	gcc -c $(SRCS_DIR)/ft_arg_parse.c -o $(BUILD_DIR)/ft_arg_parse.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
+$(BUILD_DIR)/arg_parse.o : $(SRCS_DIR)/arg_parse.c $(HEADERS) | $(OBJS_SUBDIRS)
+	gcc -c $(SRCS_DIR)/arg_parse.c -o $(BUILD_DIR)/arg_parse.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
 $(BUILD_DIR)/hash/hash_handlers.o : $(SRCS_DIR)/hash/hash_handlers.c $(HEADERS) | $(OBJS_SUBDIRS)
 	gcc -c $(SRCS_DIR)/hash/hash_handlers.c -o $(BUILD_DIR)/hash/hash_handlers.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
 $(BUILD_DIR)/hash/md5/ft_md5.o : $(SRCS_DIR)/hash/md5/ft_md5.c $(HEADERS) | $(OBJS_SUBDIRS)
