@@ -6,7 +6,7 @@ import subprocess
 import sys
 import hashlib
 
-print("\033[96m************** md5 ***************\033[0m\n")
+print("\n\033[96m************** md5 ***************\033[0m\n")
 for _ in range(10):
 
 	random_string = "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(1, 10000)))
@@ -25,7 +25,7 @@ for _ in range(10):
 	print(f"   sys |{sysresult}|\n")
 
 
-print("\033[96m************** sha256 ***************\033[0m\n")
+print("\n\033[96m************** sha256 ***************\033[0m\n")
 for _ in range(10):
 
 	random_string = "".join(random.choices(string.ascii_letters + string.digits, k=random.randint(1, 10)))

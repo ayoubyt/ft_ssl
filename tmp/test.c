@@ -4,13 +4,13 @@
 #include <stdint.h>
 #include <limits.h>
 
-#include "libft.h"
+// #include "libft.h"
 
 int main()
 {
 	// int fd = open("t.py", O_RDONLY);
-	char *s = ft_readall(0);
+	// char *s = ft_readall(0);
 
-	printf("|%s|\n", s);
-	free(s);
+	printf("|%c|\n", "bc"[0]);
+	// free(s);
 }

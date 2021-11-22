@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_global.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 21:09:41 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/14 17:09:28 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/11/21 13:44:02 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 // shift right
 # define SHR(x, n) ((x) >> (n))
 
-typedef unsigned char byte_t;
+typedef uint8_t byte_t;
 typedef uint32_t word_t;
 
 // must delete
