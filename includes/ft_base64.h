@@ -4,8 +4,11 @@
 # include "ft_global.h"
 
 # define BASE64_CHARS "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
-# define BASE64_PADD '='
+# define BASE64_PAD '='
 
+typedef {
+
+}
 
 #endif // FT_BASE64
 
