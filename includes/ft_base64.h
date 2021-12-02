@@ -8,7 +8,7 @@
 
 typedef {
 
-}
+} base64_data;
 
 #endif // FT_BASE64
 
