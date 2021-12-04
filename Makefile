@@ -7,14 +7,15 @@ BUILD_DIR := build
 HEADERS_DIR := includes
 
 SRCS := main.c \
-		utils.c \
 		arg_parse.c \
-		hash/hash_handlers.c \
+		utils.c \
+		hash/sha2/ft_sha256.c \
+		hash/sha2/ft_sha256_process.c \
 		hash/md5/ft_md5.c \
 		hash/md5/ft_md5_process.c \
-		hash/sha2/ft_sha256.c \
-		hash/sha2/ft_sha256_process.c
-
+		hash/hash_handlers.c \
+		encoding/base64/ft_base64.c \
+		encoding/base64/padd_and_map.c
 
 
 HEADERS = ft_global.h ft_md5.h
@@ -40,7 +41,7 @@ LIBFT := $(LIBFT_DIR)/$(LIBFT_BIN_DIR)/lib$(LIBFT_SUFF).a
 
 CC := gcc
 CCFLAGS := -O3
-CCLINKFLAGS =
+CCLINKFLAGS = -g
 
 # $(info $(SRCS_DIR) " :: " $(SRCS))
 # $(info  $(BUILD_DIR) ":: " $(OBJS))
@@ -66,6 +67,10 @@ $(BUILD_DIR)/hash/sha2/ft_sha256.o : $(SRCS_DIR)/hash/sha2/ft_sha256.c $(HEADERS
 	gcc -c $(SRCS_DIR)/hash/sha2/ft_sha256.c -o $(BUILD_DIR)/hash/sha2/ft_sha256.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
 $(BUILD_DIR)/hash/sha2/ft_sha256_process.o : $(SRCS_DIR)/hash/sha2/ft_sha256_process.c $(HEADERS) | $(OBJS_SUBDIRS)
 	gcc -c $(SRCS_DIR)/hash/sha2/ft_sha256_process.c -o $(BUILD_DIR)/hash/sha2/ft_sha256_process.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
+$(BUILD_DIR)/encoding/base64/ft_base64.o : $(SRCS_DIR)/encoding/base64/ft_base64.c $(HEADERS) | $(OBJS_SUBDIRS)
+	gcc -c $(SRCS_DIR)/encoding/base64/ft_base64.c -o $(BUILD_DIR)/encoding/base64/ft_base64.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
+$(BUILD_DIR)/encoding/base64/padd_and_map.o : $(SRCS_DIR)/encoding/base64/padd_and_map.c $(HEADERS) | $(OBJS_SUBDIRS)
+	gcc -c $(SRCS_DIR)/encoding/base64/padd_and_map.c -o $(BUILD_DIR)/encoding/base64/padd_and_map.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
 
 libft:
 	make -C $(LIBFT_DIR)
