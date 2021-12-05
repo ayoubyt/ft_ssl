@@ -1,6 +1,6 @@
 #include "ft_base64.h"
 
-static char *base64map(byte_t *dst, byte_t *src, size_t size)
+static char *base64map(byte_t *data, size_t size)
 {
 	char *result = NULL;
 	byte_t cursor = 2;
@@ -11,7 +11,7 @@ static char *base64map(byte_t *dst, byte_t *src, size_t size)
 	int j = 0;
 	for (size_t i = 0; i < size; i++)
 	{
-		byte_t b = src[i];
+		byte_t b = data[i];
 		switch (i % 3)
 		{
 		case 0:
@@ -42,15 +42,19 @@ char *padd_and_map(byte_t *data, size_t size)
 	size_t padded_size = size;
 	int added_pad_size = (3 - (size % 3));
 
+	// if *size* is not a multiple of 3, padd it to be
 	if (added_pad_size != 3)
 		padded_size += added_pad_size;
 	else
 		added_pad_size = 0;
 
+	// alocating the padded (or not) memory
 	padded_data = ft_memalloc(padded_size * sizeof(char));
-	result = base64map(padded_data, data, padded_size);
-
+	ft_memcpy(padded_data, data, size);
+	// mapping each 6 bits in
+	result = base64map(padded_data, padded_size);
+	free(padded_data);
 	for (size_t i = 0; i < added_pad_size; i++)
-		padded_data[size - 1 - i] = BASE64_PAD;
+		result[((padded_size * 4) / 3) - 1 - i] = BASE64_PAD;
 	return result;
 }

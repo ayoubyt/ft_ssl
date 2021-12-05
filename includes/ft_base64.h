@@ -7,7 +7,6 @@
 #define BASE64_PAD '='
 
 char *padd_and_map(byte_t *data, size_t size);
-byte_t *ft_base64_encode(byte_t *data, size_t size);
-void print_base64(byte_t *base64data, size_t size);
+char *ft_base64_encode(byte_t *data, size_t size);
 
 #endif // FT_BASE64

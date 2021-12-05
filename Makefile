@@ -40,8 +40,8 @@ LIBFT_HEADERS_DIR := $(LIBFT_DIR)/$(LIBFT_HEADERS_DIR)
 LIBFT := $(LIBFT_DIR)/$(LIBFT_BIN_DIR)/lib$(LIBFT_SUFF).a
 
 CC := gcc
-CCFLAGS := -O3
-CCLINKFLAGS = -g
+CCFLAGS := -O3 -g
+CCLINKFLAGS =
 
 # $(info $(SRCS_DIR) " :: " $(SRCS))
 # $(info  $(BUILD_DIR) ":: " $(OBJS))

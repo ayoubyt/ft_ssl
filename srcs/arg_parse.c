@@ -6,14 +6,14 @@
 /*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 13:02:31 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/11/07 21:33:35 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/12/05 19:25:23 by ayoubyt          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_arg_parse.h"
 
 args_t args = {
-	0, 0, 0, 0, {0, 0}, {0, 0}};
+	0, 0, 0, 0, 0, 0, 0, 0, {0, 0}, {0, 0}};
 
 void add_string_node(string_list_t *sl, char *str)
 {
@@ -57,10 +57,13 @@ static void parse_command(int argc, char **argv)
 		args.cmd = MD5;
 	else if (ft_strequ(argv[1], SHA256CMD))
 		args.cmd = SHA256;
+	else if (ft_strequ(argv[1], BASE64CMD))
+		args.cmd = BASE64;
 	else
 	{
-		ft_putstr_fd("error : unkown command ", 2);
-		ft_putendl_fd(argv[1], 2);
+		ft_putstr_fd("error : unkown command '", 2);
+		ft_putstr_fd(argv[1], 2);
+		ft_putendl_fd("'", 2);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -98,7 +101,24 @@ void parse_opts(int argc, char **argv)
 				case 'q':
 					args.q_opt = 1;
 					break;
+				case 'e':
+					args.e_opt = 1;
+					break;
+				case 'd':
+					args.d_opt = 1;
+					break;
+				case 'i':
+					args.i_opt = 1;
+					break;
+				case 'o':
+					args.o_opt = 1;
+					break;
+				default:
+					ft_putstr_fd("unkown option -'", 2);
+					ft_putchar_fd(argv[i][j], 2);
+					ft_putendl_fd("'", 2);
 				}
+
 			}
 		}
 		else
@@ -116,7 +136,6 @@ void ft_argparse(int argc, char **argv)
 	else
 	{
 		parse_command(argc, argv);
-		if (args.cmd == MD5 || args.cmd == SHA256)
-			parse_opts(argc, argv);
+		parse_opts(argc, argv);
 	}
 }
