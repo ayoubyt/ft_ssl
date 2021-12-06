@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handlers.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 22:33:07 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/03/13 23:18:39 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/12/06 10:03:43 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 #define HANDLERS_H
 
 void handle_hash(void);
+void handle_encoding(void);
 
 #endif // HANDLERS_H

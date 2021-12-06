@@ -15,7 +15,8 @@ SRCS := main.c \
 		hash/md5/ft_md5_process.c \
 		hash/hash_handlers.c \
 		encoding/base64/ft_base64.c \
-		encoding/base64/padd_and_map.c
+		encoding/base64/padd_and_map.c \
+		encoding/handle_encoding.c \
 
 
 HEADERS = ft_global.h ft_md5.h
@@ -71,6 +72,8 @@ $(BUILD_DIR)/encoding/base64/ft_base64.o : $(SRCS_DIR)/encoding/base64/ft_base64
 	gcc -c $(SRCS_DIR)/encoding/base64/ft_base64.c -o $(BUILD_DIR)/encoding/base64/ft_base64.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
 $(BUILD_DIR)/encoding/base64/padd_and_map.o : $(SRCS_DIR)/encoding/base64/padd_and_map.c $(HEADERS) | $(OBJS_SUBDIRS)
 	gcc -c $(SRCS_DIR)/encoding/base64/padd_and_map.c -o $(BUILD_DIR)/encoding/base64/padd_and_map.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
+$(BUILD_DIR)/encoding/handle_encoding.o : $(SRCS_DIR)/encoding/handle_encoding.c $(HEADERS) | $(OBJS_SUBDIRS)
+	gcc -c $(SRCS_DIR)/encoding/handle_encoding.c -o $(BUILD_DIR)/encoding/handle_encoding.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
 
 libft:
 	make -C $(LIBFT_DIR)
