@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_global.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 21:09:41 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/11/21 13:44:02 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/12/12 16:00:50 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@
 typedef uint8_t byte_t;
 typedef uint32_t word_t;
 
+
 // must delete
-void print_mem(unsigned char *data, size_t size);
+void	print_mem(unsigned char *data, size_t size);
 void	ft_print_byte(byte_t b);
 
 #endif
