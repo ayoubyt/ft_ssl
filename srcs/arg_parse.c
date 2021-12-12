@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoubyt <ayoubyt@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 13:02:31 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/12/05 19:25:23 by ayoubyt          ###   ########.fr       */
+/*   Updated: 2021/12/11 10:45:32 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,17 +108,36 @@ void parse_opts(int argc, char **argv)
 					args.d_opt = 1;
 					break;
 				case 'i':
-					args.i_opt = 1;
+					if (i + 1 >= argc || argv[i + 1][0] == '-')
+					{
+						ft_putstr_fd("error : must specify a file path or name after '-i' flag\n", 2);
+						print_usage();
+						exit(EXIT_FAILURE);
+					}
+					else
+					{
+						args.i_opt_param = argv[i + 1];
+						i++;
+					}
 					break;
 				case 'o':
-					args.o_opt = 1;
+					if (i + 1 >= argc || argv[i + 1][0] == '-')
+					{
+						ft_putstr_fd("error : must specify a file path or name after '-o' flag\n", 2);
+						print_usage();
+						exit(EXIT_FAILURE);
+					}
+					else
+					{
+						args.o_opt_param = argv[i + 1];
+						i++;
+					}
 					break;
 				default:
 					ft_putstr_fd("unkown option -'", 2);
 					ft_putchar_fd(argv[i][j], 2);
 					ft_putendl_fd("'", 2);
 				}
-
 			}
 		}
 		else
