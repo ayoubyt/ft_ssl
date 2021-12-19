@@ -28,7 +28,19 @@ void handle_encoding(void)
     else
         data = ft_readall_raw(0);
     base64 = ft_base64_encode(data.content, data.size);
-    print_base64(base64);
+    if (args.o_opt_param)
+    {
+        int fd = open(args.o_opt_param, O_WRONLY | O_CREAT, 0555);
+        if (fd < 0)
+        {
+            ft_putstr_fd("error : ", 2);
+            ft_putendl_fd(strerror(errno), 2);
+            exit(EXIT_FAILURE);
+        }
+         print_base64(base64, fd);
+    }
+    else
+        print_base64(base64, 1);
     free(data.content);
     free(base64);
 }
