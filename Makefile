@@ -16,7 +16,7 @@ SRCS := main.c \
 		hash/md5/ft_md5_process.c \
 		hash/hash_handlers.c \
 		encoding/base64/ft_base64.c \
-		encoding/base64/padd_and_map.c \
+		encoding/base64/base64_process.c \
 		encoding/handle_encoding.c \
 
 
@@ -71,8 +71,8 @@ $(BUILD_DIR)/hash/sha2/ft_sha256_process.o : $(SRCS_DIR)/hash/sha2/ft_sha256_pro
 	gcc -c $(SRCS_DIR)/hash/sha2/ft_sha256_process.c -o $(BUILD_DIR)/hash/sha2/ft_sha256_process.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
 $(BUILD_DIR)/encoding/base64/ft_base64.o : $(SRCS_DIR)/encoding/base64/ft_base64.c $(HEADERS) | $(OBJS_SUBDIRS)
 	gcc -c $(SRCS_DIR)/encoding/base64/ft_base64.c -o $(BUILD_DIR)/encoding/base64/ft_base64.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
-$(BUILD_DIR)/encoding/base64/padd_and_map.o : $(SRCS_DIR)/encoding/base64/padd_and_map.c $(HEADERS) | $(OBJS_SUBDIRS)
-	gcc -c $(SRCS_DIR)/encoding/base64/padd_and_map.c -o $(BUILD_DIR)/encoding/base64/padd_and_map.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
+$(BUILD_DIR)/encoding/base64/base64_process.o : $(SRCS_DIR)/encoding/base64/base64_process.c $(HEADERS) | $(OBJS_SUBDIRS)
+	gcc -c $(SRCS_DIR)/encoding/base64/base64_process.c -o $(BUILD_DIR)/encoding/base64/base64_process.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
 $(BUILD_DIR)/encoding/handle_encoding.o : $(SRCS_DIR)/encoding/handle_encoding.c $(HEADERS) | $(OBJS_SUBDIRS)
 	gcc -c $(SRCS_DIR)/encoding/handle_encoding.c -o $(BUILD_DIR)/encoding/handle_encoding.o $(CCFLAGS) -I $(HEADERS_DIR) -I $(LIBFT_HEADERS_DIR)
 

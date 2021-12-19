@@ -58,3 +58,18 @@ char *padd_and_map(byte_t *data, size_t size)
 		result[((padded_size * 4) / 3) - 1 - i] = BASE64_PAD;
 	return result;
 }
+
+static base64_input_error() {
+	ft_putendl_fd("error : invalid input", 2);
+	exit(EXIT_FAILURE);
+}
+
+data_t base64_decode(byte_t *data, size_t size)
+{
+	int padding = 0;
+
+	for (size_t i = 0; i < size; i++)
+	{
+
+	}
+}
