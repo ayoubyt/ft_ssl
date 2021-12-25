@@ -1,13 +1,16 @@
 #include "ft_base64.h"
 
-static char *base64map(byte_t *data, size_t size)
+int8_t base64map_list[255];
+
+static data_t base64map(byte_t *data, size_t size)
 {
-	char *result = NULL;
+	data_t result = {0, 0};
 	byte_t cursor = 2;
 	byte_t reserve = 0;
 	byte_t index, index2;
 
-	result = ft_memalloc(((size * sizeof(char) * 4) / 3) + 1);
+	result.size = ((size * sizeof(char) * 4) / 3);
+	result.content = ft_memalloc(result.size);
 	int j = 0;
 	for (size_t i = 0; i < size; i++)
 	{
@@ -17,28 +20,28 @@ static char *base64map(byte_t *data, size_t size)
 		case 0:
 			index = b >> 2;
 			reserve = b & 0b00000011;
-			result[j++] = BASE64_CHARS[index];
+			result.content[j++] = BASE64_CHARS[index];
 			break;
 		case 1:
 			index = (b >> 4) | (reserve << 4);
 			reserve = b & 0b00001111;
-			result[j++] = BASE64_CHARS[index];
+			result.content[j++] = BASE64_CHARS[index];
 			break;
 		case 2:
 			index = (b >> 6) | (reserve << 2);
-			result[j++] = BASE64_CHARS[index];
+			result.content[j++] = BASE64_CHARS[index];
 			index = b & 0b00111111;
-			result[j++] = BASE64_CHARS[index];
+			result.content[j++] = BASE64_CHARS[index];
 			break;
 		}
 	}
 	return result;
 }
 
-char *padd_and_map(byte_t *data, size_t size)
+data_t padd_and_map(byte_t *data, size_t size)
 {
-	char *padded_data = NULL;
-	char *result = NULL;
+	data_t result = {0, 0};
+	byte_t *padded_data = NULL;
 	size_t padded_size = size;
 	int added_pad_size = (3 - (size % 3));
 
@@ -55,17 +58,17 @@ char *padd_and_map(byte_t *data, size_t size)
 	result = base64map(padded_data, padded_size);
 	free(padded_data);
 	for (size_t i = 0; i < added_pad_size; i++)
-		result[((padded_size * 4) / 3) - 1 - i] = BASE64_PAD;
+		result.content[((padded_size * 4) / 3) - 1 - i] = BASE64_PAD;
 	return result;
 }
 
-static base64_input_error()
+static void base64_input_error()
 {
 	ft_putendl_fd("error : invalid input", 2);
 	exit(EXIT_FAILURE);
 }
 
-static void init_base64map_list(int base64map_list[255])
+void init_base64map_list()
 {
 	for (size_t i = 0; i < 255; i++)
 		base64map_list[i] = -1;
@@ -136,68 +139,82 @@ static void init_base64map_list(int base64map_list[255])
 	base64map_list['/'] = 63;
 }
 
-data_t base64_decode(byte_t *data, size_t size)
+data_t base64_reverse_map(byte_t *data, size_t size)
 {
-	int base64map_list[255];
 	int padding = 0;
 	byte_t prev_bits = 0;
 	byte_t cur_bits;
 	data_t result = {0, 0};
 
-	init_base64map_list(base64map_list);
+	init_base64map_list();
 
-	if (size % 4 != 0 || (size < 4 && size > 0))
-		base64_input_error();
-
-	int i = 0;
-	while (i < 3)
+	for (int i = 0; i < 3; i++)
 	{
-		if (i >= 2)
-			base64_input_error();
-		if (data[size - 1 - 1] == '=')
+		if (data[size - 1 - i] == '=')
 			padding++;
-		i++;
+		else
+			break;
+		if (padding > 2)
+			base64_input_error();
 	}
 
-	result.content = ft_memalloc((((size * 4) / 3) - padding));
-	result.size = ((((size * 4) / 3) - padding));
+	result.size = ((((size * 3) / 4) - padding));
+	result.content = ft_memalloc(result.size);
 
 	for (size_t i = 0; i < size; i++)
 	{
-		uint8_t unit = base64map_list[data[i]];
+		int8_t unit = base64map_list[data[i]];
 
-		if (unit == -1)
-			base64_input_error();
-
+		int j;
 		switch (i % 4)
 		{
 		case 0:
-			result.content[i] |= unit << 2;
+			j = (i * 3) / 4;
+			result.content[j] |= unit << 2;
 			break;
 		case 1:
-			result.content[i - 1] |= unit >> 4;
-			result.content[i] |= unit << 4;
+			result.content[j - 1] |= unit >> 4;
+			result.content[j] |= unit << 4;
 			break;
 		case 2:
-			result.content[i - 1] |= unit >> 4;
-			result.content[i] |= unit << 6;
+			result.content[j - 1] |= unit >> 2;
+			result.content[j] |= unit << 6;
 			break;
 		case 3:
-			result.content[i - 1] |= unit;
+			result.content[j - 1] |= unit;
 			break;
 		}
+		j++;
 	}
 
 	return result;
 }
 
-data_t base64_clean(byte_t data, size_t size)
+data_t base64_clean_and_check(byte_t *data, size_t size)
 {
 	data_t result = {0, 0};
 
 	for (size_t i = 0; i < size; i++)
+		if (!ft_isws(data[i]))
+			result.size++;
+
+	if (result.size % 4 != 0 || (result.size < 4 && result.size > 0))
+		base64_input_error();
+
+	result.content = malloc(result.size);
+
+	int i = 0, j = 0;
+	while (i < size)
 	{
-		// if (f)
+		if (!ft_isws(data[i]))
+		{
+			result.content[j] = data[i];
+			if (base64map_list[result.content[j]] == -1 && result.content[j] != BASE64_PAD)
+				base64_input_error();
+			j++;
+		}
+		i++;
 	}
 
+	return result;
 }

@@ -20,14 +20,18 @@ static data_t read_from_file(char *filename)
 
 void handle_encoding(void)
 {
-    data_t data = {0, 0};
-    char *base64;
+    data_t input = {0, 0};
+    data_t result;
 
     if (args.i_opt_param)
-        data = read_from_file(args.i_opt_param);
+        input = read_from_file(args.i_opt_param);
     else
-        data = ft_readall_raw(0);
-    base64 = ft_base64_encode(data.content, data.size);
+        input = ft_readall_raw(0);
+
+    if (!args.d_opt)
+        result = ft_base64_encode(input.content, input.size);
+    else
+        result = ft_base64_decode(input.content, input.size);
     if (args.o_opt_param)
     {
         int fd = open(args.o_opt_param, O_WRONLY | O_CREAT, 0555);
@@ -37,10 +41,10 @@ void handle_encoding(void)
             ft_putendl_fd(strerror(errno), 2);
             exit(EXIT_FAILURE);
         }
-         print_base64(base64, fd);
+        args.d_opt ? print_data(result, fd) : print_base64(result, fd);
     }
     else
-        print_base64(base64, 1);
-    free(data.content);
-    free(base64);
+        args.d_opt ? print_data(result, 1) : print_base64(result, 1);
+    free(input.content);
+    free(result.content);
 }

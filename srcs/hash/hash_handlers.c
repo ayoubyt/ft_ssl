@@ -6,7 +6,7 @@
 /*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 22:33:27 by ayoubyt           #+#    #+#             */
-/*   Updated: 2021/04/13 17:12:51 by aaguert          ###   ########.fr       */
+/*   Updated: 2021/12/25 12:34:16 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void print_hash(byte_t *data, size_t size)
 		break;
 	case SHA256:
 		ft_print_sha256_digest(ft_sha256(data, size));
+		break;
+	default:
 		break;
 	}
 }
